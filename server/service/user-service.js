@@ -16,7 +16,6 @@ class UserService {
     const userDto = new UserDto(user)
     const tokens = tokenService.generateTokens({...userDto})
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
-
     return {...tokens, user: userDto}
   }
 
@@ -33,7 +32,6 @@ class UserService {
     const tokens = tokenService.generateTokens({...userDto})
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
-
     return {...tokens, user: userDto}
   }
 
@@ -56,7 +54,6 @@ class UserService {
     const tokens = tokenService.generateTokens({...userDto})
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
-
     return {...tokens, user: userDto}
   }
 
