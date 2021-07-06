@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom'
 import './scss/index.scss'
+import Store from './store/store'
+import LoginForm from './components/LoginForm'
+
+const store = new Store()
+
+export const Context = createContext({
+  store
+})
 
 class App extends React.Component {
 
   render() {
     return (
-      <div className="hello">Hello, World!</div>
+      <Context.Provider value={{store}}>
+        <LoginForm />
+      </Context.Provider>
     )
   }
 }
