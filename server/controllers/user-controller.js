@@ -61,6 +61,24 @@ class UserController {
     }
   }
 
+  async sendMessage(req, res, next) {
+    try {
+      const {username, message} = req.body
+      const msgData = await userService.sendMessage(username, message)
+      return res.json(msgData)
+    } catch (e) {
+      next (e)
+    }
+  }
+
+  async getMessages(req, res, next) {
+    try {
+      const messages = await userService.getMessages()
+      return res.json(messages)
+    } catch (e) {
+        next (e)
+    }
+  }
 }
 
 module.exports = new UserController()

@@ -1,4 +1,5 @@
 const UserModel = require('../models/user-model')
+const MessageModel = require('../models/message-model')
 const bcrypt = require('bcrypt')
 const tokenService = require('./token-service')
 const UserDto = require('../dtos/uset-dto')
@@ -60,6 +61,17 @@ class UserService {
   async getAllUsers() {
     const users = await UserModel.find()
     return users
+  }
+
+  async sendMessage(username, message) {
+    const date = new Date()
+    const msg = await MessageModel.create({date, username, message})
+    return msg
+  }
+
+  async getMessages() {
+    const messages = await MessageModel.find()
+    return messages
   }
 }
 

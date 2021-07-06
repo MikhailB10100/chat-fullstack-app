@@ -11,6 +11,8 @@ router.post('/registration',
 )
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
+router.post('/sendmessage', userController.sendMessage)
+router.get('/messages', userController.getMessages)
 router.get('/refresh', userController.refresh)
 router.get('/users', authMiddleware, userController.getUsers)
 

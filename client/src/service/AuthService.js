@@ -13,4 +13,12 @@ export default class AuthService {
   static async logout() {
     return $api.post('/logout')
   }
+
+  static async sendMessage(username, message) {
+    return $api.post('/sendmessage', {username, message})
+  }
+
+  static async getMessages() {
+    return $api.get('/messages')
+  }
 }

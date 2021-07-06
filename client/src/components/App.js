@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import LoginForm from './LoginForm'
+import Chat from './Chat'
 import { Context } from '../index'
 import { observer } from "mobx-react-lite";
 
@@ -17,14 +18,19 @@ const App = () => {
 
   if (!store.isAuth) {
     return (
-      <LoginForm />
+      <div>
+        <LoginForm />
+      </div>
     )
+  } else {
+    store.getMessages()
   }
 
   return (
     <div>
       <h1>{store.isAuth ? `Your username: ${store.user.username}` : 'Unauthorized'}</h1>
       <button onClick={() => store.logout()}>Logout</button>
+      <Chat />
     </div>
   )
 }

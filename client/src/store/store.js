@@ -4,10 +4,8 @@ import axios from "axios"
 import { API_URL } from "../http"
 
 export default class Store {
-  user = {
-    username: '',
-    password: ''
-  }
+  user = {}
+  chat = []
   isAuth = false
   isLoading = false
 
@@ -25,6 +23,14 @@ export default class Store {
 
   setLoading(bool) {
     this.isLoading = bool
+  }
+
+  setChat(chat) {
+    this.chat = chat
+  }
+
+  addMessage(msg) {
+    this.chat.push(msg)
   }
 
   async login(username, password) {
@@ -74,6 +80,26 @@ export default class Store {
       console.log(e.response?.data?.message)
     } finally {
       this.setLoading(false)
+    }
+  }
+
+  async sendMessage(username, message) {
+    try {
+      const response = await AuthService.sendMessage(username, message)
+      console.log(response)
+      this.addMessage(response.data)
+    } catch (e) {
+      console.log(e.response?.data?.message)
+    }
+  }
+
+  async getMessages() {
+    try {
+      const response = await AuthService.getMessages()
+      console.log(response)
+      this.setChat(response.data)
+    } catch (e) {
+      console.log(e.response?.data?.message)
     }
   }
 }
