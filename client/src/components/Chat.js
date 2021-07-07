@@ -7,19 +7,33 @@ const Chat = () => {
   const [message, setMessage] = useState('')
   const {store} = useContext(Context)
   const username = store.user.username
+
+  const ch = () => {
+    const res = store.chat.map((item, index) => {
+      let date = new Date(item.date).toTimeString()
+      let nick = <b>{item.username}:</b>
+      return <p key={index}>{`${date.slice(0, 8)} ` }{nick}{` ${item.message}`}</p>
+    })
+    return res
+  }
+
+  const handleSubmit = () => {
+    if (message != '') {
+      store.sendMessage(username, message)
+      setMessage('')
+    }
+  }
+
   return (
     <div>
-      <div>{store.chat.map((item, index) => {
-        let d = item.date
-        let un = <b>{item.username}:</b>
-          return <p key={index}>{`${d} ` }{un}{` ${item.message}`}</p>
-        })}</div>
+      <div>{ch()}</div>
       <input 
         onChange={e => setMessage(e.target.value)}
         value={message}
         type='text'
+        onKeyDown={e => {if (e.key === 'Enter') handleSubmit()}}
       />
-      <button onClick={() => {store.sendMessage(username, message)}}>send</button>
+      <button onClick={handleSubmit}>send</button>
     </div>
   )
 }
