@@ -8,6 +8,7 @@ const errorMiddleware = require('./middlewares/error-middleware')
 
 const app = express()
 const WSServer = require('express-ws')(app)
+const aWss = WSServer.getWss()
 
 const PORT = process.env.PORT || 5000;
 
@@ -20,9 +21,11 @@ app.use(cors({
 app.use('/api', router)
 app.use(errorMiddleware)
 
-app.ws('/api', (ws, req) => {
+app.ws('/', (ws, req) => {
   ws.on('message', (msg) => {
-    console.log('kek')
+    aWss.clients.forEach(client => {
+      client.send(msg)
+    })  
 })
 })
 

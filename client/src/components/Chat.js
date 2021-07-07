@@ -7,7 +7,6 @@ const Chat = () => {
   const [message, setMessage] = useState('')
   const {store} = useContext(Context)
   const username = store.user.username
-  
   return (
     <div>
       <div>{store.chat.map((item, index) => {

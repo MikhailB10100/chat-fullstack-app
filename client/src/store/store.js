@@ -2,6 +2,8 @@ import AuthService from "../service/AuthService"
 import { makeAutoObservable } from 'mobx'
 import axios from "axios"
 import { API_URL } from "../http"
+import socket from '../index'
+
 
 export default class Store {
   user = {}
@@ -36,7 +38,6 @@ export default class Store {
   async login(username, password) {
     try {
       const response = await AuthService.login(username, password)
-      console.log(response)
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
@@ -48,7 +49,6 @@ export default class Store {
   async registration(username, password) {
     try {
       const response = await AuthService.registration(username, password)
-      console.log(response)
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
@@ -72,7 +72,6 @@ export default class Store {
     this.setLoading(true)
     try {
       const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
-      console.log(response)
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
@@ -86,17 +85,24 @@ export default class Store {
   async sendMessage(username, message) {
     try {
       const response = await AuthService.sendMessage(username, message)
-      console.log(response)
-      this.addMessage(response.data)
+      socket.send(JSON.stringify(response))
     } catch (e) {
       console.log(e.response?.data?.message)
     }
   }
 
+  async getMessage(msg) {
+    try {
+      this.addMessage(msg)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+
   async getMessages() {
     try {
       const response = await AuthService.getMessages()
-      console.log(response)
       this.setChat(response.data)
     } catch (e) {
       console.log(e.response?.data?.message)
