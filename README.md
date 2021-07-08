@@ -3,7 +3,7 @@ Hi there! Here is my first project. [Current I'm working on UI + little update f
 ____
 ## _**Launch**_:
 
-Best way is using VS Code, which you should open project-folder, then open 2 terminals. After it you should use next commands.
+Best way is using VS Code, in which you should open project-folder, then open 2 terminals. After it you should use next commands.
 
 ### **First terminal (Client):**
 
