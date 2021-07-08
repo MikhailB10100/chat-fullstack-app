@@ -1,12 +1,30 @@
 # chat/fullstack-app
-Hi there! Here is my first project.
+Hi there! Here is my first project. [Current I'm working on UI + little update for server].
 ____
-_**Launch**_ (don't forget to change folder on your command line):
+## _**Launch**_:
 
-- Client - `npm run start`;
+Best way is using VS Code, which you should open project-folder, then open 2 terminals. After it you should use next commands.
 
-- Server - `npm run dev`.
+### **First terminal (Client):**
+
+`cd client`
+
+`npm i`
+
+`npm run start`
+
+### **Second terminal (Server):**
+
+`cd server`
+
+`npm i`
+
+`npm run dev`
+
+Next step is open two browsers (or your browser and it's own incognito mode) -> register two users -> send messages.
+
+____
 
 You always can change database/hosts on server/.env.
-____
+
 Thank you for watching and any comments/ideas for improvement!
