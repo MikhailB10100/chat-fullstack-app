@@ -12,8 +12,8 @@ const Chat = () => {
   const ch = () => {
     const res = store.chat.map((item, index) => {
       const date = new Date(item.date).toTimeString()
-      const nick = <b>{item.username}:</b>
-      return <p key={index}>{`${date.slice(0, 8)} ` }{nick}{` ${item.message}`}</p>
+      const nick = <b>{`${item.username}:`}</b>
+      return <p key={index}>{`${date.slice(0, 8)} `}{nick}{` ${item.message}`}</p>
     })
     return res
   }
@@ -26,17 +26,29 @@ const Chat = () => {
   }
 
   return (
-    <div className="content-chat">
-      <div className="content-chat-communication_area">{ch()}</div>
-      <input 
-        onChange={e => setMessage(e.target.value)}
-        className="content-chat-message_input"
-        value={message}
-        type='text'
-        onKeyDown={e => {if (e.key === 'Enter') handleSubmit()}}
-        autoFocus
-      />
-      <button className="content-chat-send_button"onClick={handleSubmit}>Send</button>
+    <div className="wrap">
+       <div className="content-chat">
+        <div className="content-chat-header">
+          <div className="chat-header-username">
+            <h1>Your username: <b>{store.user.username}</b></h1>
+          </div>
+          <div className="chat-header-logout_button">
+            <button className="logout_button" onClick={() => store.logout()}>Logout</button>
+          </div>
+        </div>
+        <div className="content-chat-communication_area">{ch()}</div>
+        <div className="content-chat-send_message">
+          <input 
+            onChange={e => setMessage(e.target.value)}
+            className="content-chat-message_input"
+            value={message}
+            type='text'
+            onKeyDown={e => {if (e.key === 'Enter') handleSubmit()}}
+            autoFocus
+          />
+          <button className="content-chat-send_button"onClick={handleSubmit}>{'>'}</button>
+        </div>
+      </div>
     </div>
   )
 }
