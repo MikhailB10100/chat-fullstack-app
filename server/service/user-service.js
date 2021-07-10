@@ -12,7 +12,7 @@ class UserService {
       throw ApiError.BadRequest(`Username '${username}' is already taken.`)
     }
     const hashPassword = await bcrypt.hash(password, 3)
-    const user = await UserModel.create({username, password: hashPassword})
+    const user = await UserModel.create({username: username.trim(), password: hashPassword})
 
     const userDto = new UserDto(user)
     const tokens = tokenService.generateTokens({...userDto})

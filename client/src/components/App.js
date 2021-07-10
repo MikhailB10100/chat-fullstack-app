@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import LoginForm from './LoginForm'
 import Chat from './Chat'
 import { Context } from '../index'
@@ -12,26 +12,28 @@ const App = () => {
     }
   }, [])
 
+  let body = ''
+
   if (store.isLoading) {
-    return <div>Loading...</div>
+    body = <div>Loading...</div>
   }
 
   if (!store.isAuth) {
-    return (
-      <div>
-        <LoginForm />
-      </div>
-    )
+    body = <LoginForm />
+
   } else {
     store.getMessages()
-  }
-
-  return (
-    <div>
+    body = (
+    <>
       <h1>{store.isAuth ? `Your username: ${store.user.username}` : 'Unauthorized'}</h1>
       <button onClick={() => store.logout()}>Logout</button>
       <Chat />
-    </div>
+    </>
+    )
+  }
+
+  return (
+    <div className="content">{body}</div>
   )
 }
 
