@@ -25,8 +25,6 @@ const App = () => {
     store.getMessages()
     body = (
     <>
-      <h1>{store.isAuth ? `Your username: ${store.user.username}` : 'Unauthorized'}</h1>
-      <button onClick={() => store.logout()}>Logout</button>
       <Chat />
     </>
     )
