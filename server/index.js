@@ -26,7 +26,7 @@ app.ws('/', (ws, req) => {
     aWss.clients.forEach(client => {
       client.send(msg)
     })  
-})
+  })
 })
 
 const start = async () => {
@@ -36,7 +36,6 @@ const start = async () => {
       useUnifiedTopology: true
     })
     app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`))
-    
   } catch (e) {
     console.log(e);
   }

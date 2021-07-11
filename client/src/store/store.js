@@ -4,7 +4,6 @@ import axios from "axios"
 import { API_URL } from "../http"
 import socket from '../index'
 
-
 export default class Store {
   user = {}
   chat = []
@@ -98,7 +97,6 @@ export default class Store {
       console.log(e)
     }
   }
-
 
   async getMessages() {
     try {

@@ -2,13 +2,11 @@ import React, {useState, useContext} from 'react'
 import { Context } from '../index'
 import { observer } from "mobx-react-lite";
 
-
 const Chat = () => {
   const [message, setMessage] = useState('')
   const {store} = useContext(Context)
   const username = store.user.username
 
-  
   const ch = () => {
     const res = store.chat.map((item, index) => {
       const date = new Date(item.date).toTimeString()
