@@ -3,6 +3,7 @@ const MessageModel = require('../models/message-model')
 const bcrypt = require('bcrypt')
 const tokenService = require('./token-service')
 const UserDto = require('../dtos/uset-dto')
+const MessageDto = require('../dtos/message-dto')
 const ApiError = require('../exceptions/api-error')
 
 class UserService {
@@ -60,18 +61,22 @@ class UserService {
 
   async getAllUsers() {
     const users = await UserModel.find()
-    return users
+    const usersDto = users.map(item => new UserDto(item))
+    return usersDto
   }
 
   async sendMessage(username, message) {
     const date = new Date()
     const msg = await MessageModel.create({date, username, message})
-    return msg
+
+    const messageDto = new MessageDto(msg)
+    return messageDto
   }
 
   async getMessages() {
     const messages = await MessageModel.find()
-    return messages
+    const messagesDto = messages.map(item => new MessageDto(item))
+    return messagesDto
   }
 }
 
