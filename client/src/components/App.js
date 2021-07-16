@@ -17,7 +17,7 @@ const App = () => {
     body = <div>Loading...</div>
   } else if (!store.isAuth) {
     body = (
-    <div className="content">
+    <div className="content" style={{minHeight: '100vh'}}>
       <LoginForm />
     </div>
     )
