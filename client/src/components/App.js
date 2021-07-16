@@ -16,13 +16,17 @@ const App = () => {
   if (store.isLoading) {
     body = <div>Loading...</div>
   } else if (!store.isAuth) {
-    body = <LoginForm />
+    body = (
+    <div className="content">
+      <LoginForm />
+    </div>
+    )
   } else {
     store.getMessages()
     body = <Chat />
   }
 
-  return <div className="content">{body}</div>
+  return <>{body}</>
 }
 
 export default observer(App)

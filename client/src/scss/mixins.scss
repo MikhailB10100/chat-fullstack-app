@@ -1,0 +1,9 @@
+@mixin send-border() {
+  border: 2px solid #3e3e3e;
+  border-radius: 19.5px;
+}
+
+@mixin content-border ($color) {
+  border: 2px solid $color;
+  border-radius: 30px;
+}
