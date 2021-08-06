@@ -1,5 +1,5 @@
 # chat/fullstack-app
-Hi there! Here is my first project. [Current I'm working on UI + little update for server].
+Hi there! Here is my first pet-project.
 ____
 ## _**Launch**_:
 
