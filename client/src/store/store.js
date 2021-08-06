@@ -100,8 +100,10 @@ export default class Store {
 
   async getMessages() {
     try {
+      this.setLoading(true)
       const response = await AuthService.getMessages()
       this.setChat(response.data)
+      this.setLoading(false)
     } catch (e) {
       console.log(e.response?.data?.message)
     }

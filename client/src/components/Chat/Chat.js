@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
-import { Context } from '../index'
+import { Context } from '@/index'
 import { observer } from "mobx-react-lite";
 
 

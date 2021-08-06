@@ -1,32 +1,25 @@
 import React, { useContext, useEffect } from 'react'
-import LoginForm from './LoginForm'
-import Chat from './Chat'
-import { Context } from '../index'
+import LoginForm from './LoginForm/LoginForm'
+import Chat from './Chat/Chat'
+import { Context } from '@/index'
 import { observer } from "mobx-react-lite";
 
 const App = () => {
   const {store} = useContext(Context)
-  let body
+  const {isLoading, isAuth} = store
   useEffect(() => {
     if (localStorage.getItem('token')) {
       store.checkAuth()
     }
   }, [])
 
-  if (store.isLoading) {
-    body = <div>Loading...</div>
-  } else if (!store.isAuth) {
-    body = (
-    <div className="content" style={{minHeight: '100vh'}}>
-      <LoginForm />
-    </div>
-    )
-  } else {
-    store.getMessages()
-    body = <Chat />
-  }
+  useEffect(() => {
+    if (isAuth) store.getMessages()
+  }, [isAuth])
 
-  return <>{body}</>
+  return isLoading
+          ? <h1>Loading ...</h1> 
+          : (isAuth ? <Chat /> : <LoginForm />)
 }
 
 export default observer(App)
